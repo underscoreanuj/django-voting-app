@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>ELECTIONS</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        {% block content %}
+        {% if voted_for.candidate_name %}
+        <h1 class="display-2">You voted for: {{ voted_for.candidate_name }}</h1>
+        {% else %}
+        <h1 class="display-2">You did not vote!!!</h1>
+        {% endif %}
+        <hr />
+        <hr />
+        {% if election.is_complete %}
+        <h2 class="display-4">Election Results</h2>
+        {% else %}
+        <h2 class="display-4">Current Election status</h2>
+        {% endif %}
+
+        {% for candidate_obj in candidates %}
+        <div class='row'></div>
+        <div class="card">
+            <div class="card-body">
+                <form action="vote" method="post">{% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" readonly class="form-control-plaintext" id="candidate_name"
+                            value="{{ candidate_obj.candidate_name }}">
+                        <input type="text" class="form-control" id="candidate_id" name="candidate_id"
+                            value="{{ candidate_obj.candidate_id }}" hidden>
+                        <input type="text" class="form-control" id="voter_id" name="voter_id" value="{{ voter_id }}"
+                            hidden>
+                    </div>
+                    <p>Vote Count: {{ candidate_obj.vote_count }}</p>
+                </form>
+            </div>
+        </div>
+
+        <hr />
+        {% endfor %}
+
+        {% endblock content %}
+
+    </div>
+</body>
+
+</html>

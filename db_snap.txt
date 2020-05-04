@@ -1,0 +1,14 @@
+sqlite> .tables
+auth_group                  django_content_type       
+auth_group_permissions      django_migrations         
+auth_permission             django_session            
+auth_user                   election_candidate        
+auth_user_groups            election_election         
+auth_user_user_permissions  election_voter            
+django_admin_log          
+sqlite> select * from election_voter;
+123|9���s�Z�\�[�~�V��#��j25ɞ��݆�1=|1|123|asdfasdf
+456|K@�
+       ���?��t%��x�Q+p��+->�\�<�%h
+                                  &��|0|123|
+sqlite> 
